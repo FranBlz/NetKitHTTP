@@ -1,4 +1,4 @@
-ifconfig eth0 20.0.0.1 netmask 255.255.255.0 up
+ifconfig eth0 20.0.0.3 netmask 255.255.255.0 up
 
 route add default gw 20.0.0.2
 

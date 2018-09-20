@@ -1,0 +1,11 @@
+$TTL    60000
+@               IN      SOA	server2.srv2.	root.server2.srv2. (
+                        2006031801 ; serial
+                        28800 ; refresh
+                        14400 ; retry
+                        3600000 ; expire
+                        0 ; negative cache ttl
+                        )
+
+@           	IN      NS	server2.srv2.
+server2		IN      A       20.0.0.3
