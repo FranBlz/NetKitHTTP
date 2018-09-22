@@ -1,0 +1,14 @@
+$TTL    60000
+@        IN SOA  dnsnet.www.   root.dnsnet.www. (
+                    2006031201 ; serial
+                    28800 ; refresh
+                    14400 ; retry
+                    3600000 ; expire
+                    0 ; negative cache ttl
+                 )
+@        IN NS   dnsnet.www.
+dnsnet   IN  A   10.0.0.5
+
+server   IN  A   192.168.0.222
+
+server2  IN  A   192.168.0.211

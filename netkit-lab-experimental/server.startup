@@ -1,6 +1,6 @@
-ifconfig eth0 20.0.0.1 netmask 255.255.255.0 up
+ifconfig eth0 192.168.0.222 netmask 255.255.255.128 up
 
-route add default gw 20.0.0.2
+route add default gw 192.168.0.129 dev eth0
 
+a2enmod userdir
 /etc/init.d/apache2 start
-
