@@ -1,0 +1,21 @@
+$TTL   60000
+@              IN SOA   ROOT-SERVER.   root.ROOT-SERVER. (
+                            2006031201 ; serial
+                            28800 ; refresh
+                            14400 ; retry
+                            3600000 ; expire
+                            0 ; negative cache ttl
+                        )
+
+@              IN NS    ROOT-SERVER.
+ROOT-SERVER.   IN A     10.0.0.2
+
+org.		IN 	NS	dnsorg.org. //esto no funciona y no se como dividirlo. Puede ser en 2 archivos y que el "named.conf" 
+dnsorg.org.	IN 	A	10.0.0.2    // redirecione a cada x.db o todo en este mismo archivo.
+
+net.		IN 	NS	dnsnet.net.
+dnsnet.net.	IN 	A	10.0.0.2
+
+server1    IN A     20.0.0.2
+
+server2    IN A     20.0.0.3
