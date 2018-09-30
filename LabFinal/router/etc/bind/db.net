@@ -1,0 +1,13 @@
+$TTL    60000
+@        IN SOA  dnstec.net.   root.dnstec.net. (
+                    2006031201 ; serial
+                    28800 ; refresh
+                    14400 ; retry
+                    3600000 ; expire
+                    0 ; negative cache ttl
+                 )
+@        IN NS   dnstec.net.
+dnstec   IN  A   11.0.0.1
+
+www.tec   IN  A   11.0.0.2
+www.mit   IN  A   12.0.0.2
