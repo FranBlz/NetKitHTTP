@@ -1,4 +1,7 @@
 ifconfig eth0 12.0.0.2 netmask 255.255.255.0 up
 route add default gw 12.0.0.1 dev eth0
 /etc/init.d/apache2 start
-
+a2dissite default
+a2ensite mit.net.conf
+a2ensite tec.net.conf
+/etc/init.d/apache2 restart
