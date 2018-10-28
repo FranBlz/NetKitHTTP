@@ -24,11 +24,11 @@
 	
 	\verb|tcpdump -w /hosthome/'captura'.pcap -s 0| 
 	
-	Finalizado esto, mediante 'links' ingresamos al servidor mediante su IP, donde completamos el formulario (Tanto mediante POST como GET).
+	Finalizado esto, mediante 'links' ingresamos al servidor mediante su IP, donde completamos el formulario (Empleando tanto POST como GET).
 	
 	Una vez realizado el paso anterior, estas tramas fueron analizadas con WireShark, donde nos centramos en buscar las diferencias entre GET y POST y su funcionamiento.
 	
-	Al analizar el envío de datos a nivel de protocolo, nos dimos cuenta que GET envía los mismo a traves de la URL de la página, situación que puede llegar a ser indeseable cuando se trabaja con información privada o personal, tal como contraseñas, tarjetas de credito, etc. Por su parte, POST enviá los datos como un paquete 'oculto', por lo que si alguien captura la URL del usuario, no podrá extraer ninguna información de esta misma.
+	Al analizar el envío de datos a nivel de protocolo, nos dimos cuenta que GET envía los mismos a través de la URL de la página, situación que puede llegar a ser indeseable cuando se trabaja con información privada o personal, tal como contraseñas, tarjetas de crédito, etc. Por su parte, POST enviá los datos como un paquete 'oculto', por lo que si alguien captura la URL del usuario, no podrá extraer ninguna información de esta misma.
 	
 	\begin{figure}[H]
 		\includegraphics[width=\linewidth]{getvspost.png}
@@ -36,11 +36,11 @@
 		\label{fig:img1}
 	\end{figure}
 
-	En la figura 1 se puede observar las tramas en donde se enviaron los formularios mediante HTTP. Del lado izquierdo se muestra la informacion de la trama con el formulario que emplea el metodo GET, se observa que este trabaja sin condificar la informacion, es decir, envia el formulario en forma de URL. Mientras que en el lado derecho donde se observa la trama con el formulario que emplea el metodo POST, este define:
+	En la figura 1 se puede observar las tramas en donde se enviaron los formularios mediante HTTP. Del lado izquierdo se muestra la información de la trama con el formulario que emplea el método GET, se observa que este trabaja sin codificar la información, es decir, envía el formulario en forma de URL. Mientras que en el lado derecho donde se observa la trama con el formulario que emplea el método POST, este define:
 	
 	\verb| Content-type: application/x-www-form-urlencoded\r\n|
 	
-	De esta definicion se deduce que el metodo POST codifica la infomacion del formulario en forma de un string.
+	De esta definición se deduce que el metodo POST codifica la infomación del formulario antes de enviarla.
 	
 	\section{Persistencia}
 	HTTP 1.1 es persistente ya que utiliza TCP para mantener una pseudo sesión por la cual se envían y reciben los paquetes. El tiempo de dicha conexión esta dictado por apache, normalmente van de 15 a 5 segundos, lo que permite que durante estas ventanas de conexión múltiples paquetes sean enviados/recibidos pero tampoco saturan al servidor con muchas conexiones constantes y paralelas.
@@ -53,7 +53,7 @@
 	
 	Como se observa en la figura anterior, la conexión tiene la característica de mantenerse viva tras el envío del paquete, indicando un timeout para esta de 15 segundos.
 	\section{DNS y WWW}
-	La WWW necesita del DNS para iniciar el proceso de enrutamiento, en el cual, utilizando un buscador se introduce una URL la cual DNS asocia con su respectiva IP de servidor, HTTP luego procesa el resto del enrutamiento para asi obtener al principio el HTML básico de la pagina y luego pedir el resto de paquetes necesarios.
+	La WWW necesita del DNS para iniciar el proceso de enrutamiento, en el cual, utilizando un buscador se introduce una URL la cual DNS asocia con su respectiva IP de servidor, HTTP luego procesa el resto del enrutamiento para así obtener al principio el HTML básico de la pagina y luego pedir el resto de paquetes necesarios.
 	
 	Para lograr esto, el laboratorio fue configurado de la siguiente manera.
 	
@@ -69,6 +69,6 @@
 	Finalmente, para la última actividad modificamos los DNS para que apunten a uno solo de los servidores y que el redireccionamiento quede a cargo de Apache.
 	Para esto lo primero fue modificar los archivos DNS, solo fue necesario cambiar la IP de algún servidor por la del otro y listo.
 	Para que Apache reconociese a ambos servidores individualmente primero creamos dos directorios, uno para cada servidor con paginas distintas dentro de cada uno.
-	Buscando un poco sobre las opciones y configuracion de Apache descubrimos que el mismo posee una carpeta de sitios disponibles dentro de la cual estan los .conf de dichas páginas, con esto pudimos modificar dichos archivos para que cada uno supiese el nombre de su servidor, el alias y donde buscar la pagina del mismo.
-	Una vez hecho esto con ambos servidores desactivamos los sitiso "default" de Apache con --a2dissite default (en /etc/apache2/sites-available)--, luego activamos los nuestros con a2ensite, reiniciamos Apache y comprobamos satisfactoriamente el resultado. 
+	Buscando un poco sobre las opciones y configuración de Apache descubrimos que el mismo posee una carpeta de sitios disponibles dentro de la cual están los .conf de dichas páginas, con esto pudimos modificar dichos archivos para que cada uno supiese el nombre de su servidor, el alias y donde buscar la pagina del mismo.
+	Una vez hecho esto con ambos servidores desactivamos los sitios "default" de Apache con --a2dissite default (en /etc/apache2/sites-available)--, luego activamos los nuestros con a2ensite, reiniciamos Apache y comprobamos satisfactoriamente el resultado. 
 \end{document}
