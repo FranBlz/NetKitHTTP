@@ -33,7 +33,7 @@
 	\begin{figure}[H]
 		\includegraphics[width=\linewidth]{getvspost.png}
 		\caption{Captura de tramas HTTP}
-		\label{fig:boat1}
+		\label{fig:img1}
 	\end{figure}
 
 	En la figura 1 se puede observar las tramas en donde se enviaron los formularios mediante HTTP. Del lado izquierdo se muestra la informacion de la trama con el formulario que emplea el metodo GET, se observa que este trabaja sin condificar la informacion, es decir, envia el formulario en forma de URL. Mientras que en el lado derecho donde se observa la trama con el formulario que emplea el metodo POST, este define:
@@ -44,15 +44,29 @@
 	
 	\section{Persistencia}
 	HTTP 1.1 es persistente ya que utiliza TCP para mantener una pseudo sesión por la cual se envían y reciben los paquetes. El tiempo de dicha conexión esta dictado por apache, normalmente van de 15 a 5 segundos, lo que permite que durante estas ventanas de conexión múltiples paquetes sean enviados/recibidos pero tampoco saturan al servidor con muchas conexiones constantes y paralelas.
+	
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{crop.png}
+		\caption{Persistencia en HTTP}
+		\label{fig:img2}
+	\end{figure}
+	
+	Como se observa en la figura anterior, la conexión tiene la característica de mantenerse viva tras el envío del paquete, indicando un timeout para esta de 15 segundos.
 	\section{DNS y WWW}
-	La WWW necesita del DNS para iniciar el proceso de enrutamiento, en el cual, utilizando un buscador se introduce una URL la cual DNS asocia con su respectiva IP de servidor, HTTP luego procesa el resto del enrutamiento para asi obtener al principio el HTML basico de la pagina y luego pedir el resto de paquetes necesarios.
+	La WWW necesita del DNS para iniciar el proceso de enrutamiento, en el cual, utilizando un buscador se introduce una URL la cual DNS asocia con su respectiva IP de servidor, HTTP luego procesa el resto del enrutamiento para asi obtener al principio el HTML básico de la pagina y luego pedir el resto de paquetes necesarios.
+	
+	Para lograr esto, el laboratorio fue configurado de la siguiente manera.
 	
 	\section{Configuracion}
-	La configuración de los subdominios y sus alias fue realizada en el router de la red ya que este tambien acuta de NS. Donde se asigno el subdominio "www.tec" al primer servidor con IP 11.0.0.2 y "www.mit" al segundo con IP 12.0.0.2.
+	La configuración de los subdominios y sus alias fue realizada en el router de la red, actuando este a su vez como NS. Aquí asignamos los nombres (subdominios)  "www.tec" al primer servidor con IP 11.0.0.1 y "www.mit" al segundo con IP 12.0.0.2.
+	
+	Tras esto, con el cliente intentamos acceder al servidor, solo que, esta vez ingresamos "www.tec.net" en la búsqueda de links, al contrario de su IP.
+	Este intento fue satisfactorio, con lo que comprobamos que el NS fue correctamente configurado.
 	
 	
 	\section{Apache}
-	Para la actividad final modificamos los DNS para que apunten a uno solo de los servidores y que el redireccionamiento quede a cargo de Apache.
+	
+	Finalmente, para la última actividad modificamos los DNS para que apunten a uno solo de los servidores y que el redireccionamiento quede a cargo de Apache.
 	Para esto lo primero fue modificar los archivos DNS, solo fue necesario cambiar la IP de algún servidor por la del otro y listo.
 	Para que Apache reconociese a ambos servidores individualmente primero creamos dos directorios, uno para cada servidor con paginas distintas dentro de cada uno.
 	Buscando un poco sobre las opciones y configuracion de Apache descubrimos que el mismo posee una carpeta de sitios disponibles dentro de la cual estan los .conf de dichas páginas, con esto pudimos modificar dichos archivos para que cada uno supiese el nombre de su servidor, el alias y donde buscar la pagina del mismo.
