@@ -22,7 +22,7 @@
 	Como primer paso, creamos un archivo 'index.html', el cual posee la simple función de enlazar a 2 formularios; uno que envía los datos a través de GET y otro mediante POST.
 	Tras esto activamos la captura de tramas con el siguiente comando: 
 	
-	\verb|tcpdump -w /hosthome/'captura'.pcap| 
+	\verb|tcpdump -w /hosthome/'captura'.pcap -s 0| 
 	
 	Finalizado esto, mediante 'links' ingresamos al servidor mediante su IP, donde completamos el formulario (Tanto mediante POST como GET).
 	
@@ -30,40 +30,22 @@
 	
 	Al analizar el envío de datos a nivel de protocolo, nos dimos cuenta que GET envía los mismo a traves de la URL de la página, situación que puede llegar a ser indeseable cuando se trabaja con información privada o personal, tal como contraseñas, tarjetas de credito, etc. Por su parte, POST enviá los datos como un paquete 'oculto', por lo que si alguien captura la URL del usuario, no podrá extraer ninguna información de esta misma.
 	
-	Agregar imágenes, señalando o mostrando la diferencia entre POST y GET.
+	\begin{figure}[H]
+		\includegraphics[width=\linewidth]{getvspost.png}
+		\caption{Captura de tramas HTTP}
+		\label{fig:boat1}
+	\end{figure}
+
+	En la figura 1 se puede observar las tramas en donde se enviaron los formularios mediante HTTP. Del lado izquierdo se muestra la informacion de la trama con el formulario que emplea el metodo GET, se observa que este trabaja sin condificar la informacion, es decir, envia el formulario en forma de URL. Mientras que en el lado derecho donde se observa la trama con el formulario que emplea el metodo POST, este define:
 	
-	Agregar imágenes, señalando o mostrando la diferencia entre POST y GET.
+	\verb| Content-type: application/x-www-form-urlencoded\r\n|
 	
-	Agregar imágenes, señalando o mostrando la diferencia entre POST y GET.
-	
-	Agregar imágenes, señalando o mostrando la diferencia entre POST y GET.
-	
-	Agregar imágenes, señalando o mostrando la diferencia entre POST y GET.
-	
-	Agregar imágenes, señalando o mostrando la diferencia entre POST y GET.
-	
-	Agregar imágenes, señalando o mostrando la diferencia entre POST y GET.
-	
-	Agregar imágenes, señalando o mostrando la diferencia entre POST y GET.
+	De esta definicion se deduce que el metodo POST codifica la infomacion del formulario en forma de un string.
 	
 	\section{Persistencia}
 	HTTP 1.1 es persistente ya que utiliza TCP para mantener una pseudo sesión por la cual se envían y reciben los paquetes. El tiempo de dicha conexión esta dictado por apache, normalmente van de 15 a 5 segundos, lo que permite que durante estas ventanas de conexión múltiples paquetes sean enviados/recibidos pero tampoco saturan al servidor con muchas conexiones constantes y paralelas.
 	\section{DNS y WWW}
 	La WWW necesita del DNS para iniciar el proceso de enrutamiento, en el cual, utilizando un buscador se introduce una URL la cual DNS asocia con su respectiva IP de servidor, HTTP luego procesa el resto del enrutamiento para asi obtener al principio el HTML basico de la pagina y luego pedir el resto de paquetes necesarios.
-	
-	Falta agregar como  lo configuramos
-	
-	Falta agregar como  lo configuramos
-	
-	Falta agregar como  lo configuramos
-	
-	Falta agregar como  lo configuramos
-	
-	Falta agregar como  lo configuramos
-	
-	Falta agregar como  lo configuramos
-	
-	Falta agregar como  lo configuramos
 	
 	\section{Configuracion}
 	La configuración de los subdominios y sus alias fue realizada en el router de la red ya que este tambien acuta de NS. Donde se asigno el subdominio "www.tec" al primer servidor con IP 11.0.0.2 y "www.mit" al segundo con IP 12.0.0.2.
